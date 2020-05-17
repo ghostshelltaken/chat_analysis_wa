@@ -17,7 +17,11 @@ def main():
 				sender = msg[:msg.find(':')]
 				time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
 
-				qry = "INSERT INTO media_history(time, sent_by, message) VALUES(?, ?, ?)"
+				qry = "INSERT INTO media_history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
+
+				dbObj.make_connection()
+				dbObj.execute_query(qry)
+				dbObj.close_connection()
 				o += 1
 
 			elif 'encryption' in line:
