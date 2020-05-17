@@ -7,7 +7,7 @@ class Database:
         self.cursor = None
 
     def make_connection(self):
-        self.conn = sqlite3.connect('')
+        self.conn = sqlite3.connect('./database/chats.db')
         self.cursor = self.conn.cursor()
 
     def close_connection(self):
