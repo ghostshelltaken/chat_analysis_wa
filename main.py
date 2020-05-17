@@ -18,7 +18,6 @@ def main():
 				time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
 
 				qry = "INSERT INTO media_history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
-
 				dbObj.make_connection()
 				dbObj.execute_query(qry)
 				dbObj.close_connection()
@@ -32,6 +31,11 @@ def main():
 				sender = msg[:msg.find(':')]
 				msg = msg [msg.find(':')+2:]
 				time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
+
+				qry = "INSER INTO history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
+				dbObj.make_connection()
+				dbObj.execute_query(qry)
+				dbObj.close_connection()
 
 	print(f'omitted {o}')
 	print(f'links {link}')
