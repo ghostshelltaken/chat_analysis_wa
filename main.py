@@ -11,11 +11,15 @@ def main():
 	a = 0
 	with open("./assets/Chat_backup.txt", 'r', encoding = 'utf-8') as f:
 		for line in f.readlines():
+			time = None
 			if 'omitted' in line:
-				time, text = line[:line.find(']')+1].strip(']').strip('['), line[line.find(']')+2:]
-				msg = msg [msg.find(':')+2:]
-				sender = msg[:msg.find(':')]
-				time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
+				time, text = line[2:line.find(']')], line[line.find(']')+2:]
+				sender = text[:text.find(':')]
+				msg = text[text.find(':')+2:]
+				try:
+					time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
+				except Exception as e:
+					print(e)
 
 				qry = "INSERT INTO media_history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
 				dbObj.make_connection()
@@ -24,15 +28,15 @@ def main():
 				o += 1
 
 			elif 'encryption' in line:
-				print(i)
+				print(line)
 
 			else:
-				time, text = line[:line.find(']')+1].strip(']').strip('['), line[line.find(']')+2:]
-				sender = msg[:msg.find(':')]
-				msg = msg [msg.find(':')+2:]
+				time, text = line[1:line.find(']')], line[line.find(']')+2:]
+				sender = text[:text.find(':')]
+				msg = text[text.find(':')+2:]
 				time = datetime.strptime(time, "%d/%m/%y, %I:%M:%S %p")
 
-				qry = "INSER INTO history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
+				qry = "INSERT INTO history(time, sent_by, message) VALUES(?, ?, ?)", (time, users[sender], msg)
 				dbObj.make_connection()
 				dbObj.execute_query(qry)
 				dbObj.close_connection()
