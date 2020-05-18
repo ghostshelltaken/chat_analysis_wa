@@ -18,13 +18,9 @@ class Database:
         self.conn.commit()
 
     def select_query(self, query):
-
-        if query == tuple():
-            self.cursor.execute(*query)
-            result = self.cursor.fetchall()
-        else:
-            self.cursor.execute(query)
-            result = self.cursor.fetchall()
+                
+        self.cursor.execute(*query)
+        result = self.cursor.fetchall()
 
         self.conn.commit()
         return result
