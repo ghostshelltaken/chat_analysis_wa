@@ -18,3 +18,4 @@
 ### Results
 
 	- Bar chart of messages sent by each users.
+	![](https://github.com/ghostshelltaken/WhatsApp_Chat_Analysis/blob/master/images/Figure_1.png)
