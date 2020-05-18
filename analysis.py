@@ -13,13 +13,14 @@ def first_visual():
     dbObj = Database()
 
     ##-------------------------Getting total count of messages without_media-----------------------
+    without_media = []
     query = "SELECT count(message) From history where sent_by = ?", (rahi_key, )
 
     dbObj.make_connection()
     data = dbObj.select_query(query)
     dbObj.close_connection()
 
-    without_media_rahi = data[0][0]
+    without_media.append(data[0][0])
 
     query = "SELECT count(message) From history where sent_by = ?", (chaitanya_key, )
 
@@ -27,6 +28,28 @@ def first_visual():
     data = dbObj.select_query(query)
     dbObj.close_connection()
 
-    without_media_chaitanya = data[0][0]
+    without_media.append(data[0][0])
+    print(without_media)
+
+    ##------------------------Getting Message count for only media---------------------------------
+    media_only = []
+
+    query = "SELECT count(message) From media_history where sent_by = ?", (rahi_key, )
+
+    dbObj.make_connection()
+    data = dbObj.select_query(query)
+    dbObj.close_connection()
+
+    media_only.append(data[0][0])
+
+    query = "SELECT count(message) From media_history where sent_by = ?", (chaitanya_key, )
+
+    dbObj.make_connection()
+    data = dbObj.select_query(query)
+    dbObj.close_connection()
+
+    media_only.append(data[0][0])
+    print(media_only)
+
 
 first_visual()
