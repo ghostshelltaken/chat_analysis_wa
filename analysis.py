@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 from db_module import Database
+import numpy as np
 
 users = ['Rahi', 'Chaitanya']
 rahi_key = 1
@@ -51,5 +52,29 @@ def first_visual():
     media_only.append(data[0][0])
     print(media_only)
 
+    total_chats = [without_media[0]+media_only[0], without_media[1]+media_only[1]]
+    # print(total_chats)
+
+    ##------------------------- Plotting without_media--------------------------------------
+    width = 0.25
+    x_index = np.arange(len(users))
+
+    plt.style.use('fivethirtyeight')
+    plt.xkcd()
+
+    plt.bar(x_index - width, media_only, width=width, label='media only chats', color='#ADD8E6')
+
+    plt.bar(x_index, without_media, width=width, label='without media chats', color='#ff726f')
+
+    plt.bar(x_index + width, total_chats, width=width, label='total chats', color='#000045')
+
+    plt.title('Messages sent by each person')
+    plt.ylabel('Number of messages')
+
+    plt.xticks(ticks=x_index, labels=users)
+
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
 
 first_visual()
