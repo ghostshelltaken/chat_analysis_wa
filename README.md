@@ -1,8 +1,8 @@
 
-# WhatsApp_Chat_Analysis
+# chat_analysis_wa
 
-	This project is to do WhatsApp's Chat Analysis and make bunch of  graphs also to practice follwing topics to
-	get better idea.
+This project is to do WhatsApp's Chat Analysis and make bunch of  graphs also to practice follwing topics to
+get better idea.
 
 	- Sqlite3 - To store history data of chats
 	- Matplotlib - to make figures
